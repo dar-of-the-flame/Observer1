@@ -557,10 +557,15 @@ function toggleSound() {
         elements.menuMusic.volume = CONFIG.music.volume;
         elements.gameMusic.volume = CONFIG.music.volume;
         
+        // Если в меню, попробуем запустить меню-музыку
         if (gameState.currentState === CONFIG.states.MENU) {
-            elements.menuMusic.play();
+            elements.menuMusic.play().catch(e => {
+                console.log("Нужно кликнуть по экрану для запуска музыки");
+            });
         } else if (gameState.currentState === CONFIG.states.PLAYING) {
-            elements.gameMusic.play();
+            elements.gameMusic.play().catch(e => {
+                console.log("Нужно кликнуть по экрану для запуска музыки");
+            });
         }
     } else {
         elements.menuMusic.volume = 0;
@@ -1148,4 +1153,5 @@ function showEndScreen(title, message) {
 // ===== ЗАПУСК ИГРЫ =====
 
 window.addEventListener('DOMContentLoaded', init);
+
 
