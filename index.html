@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>НАБЛЮДАТЕЛЬ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cinzel:wght@700&family=Special+Elite&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+        
+        #app-container {
+            width: 720px;
+            height: 1280px;
+            position: relative;
+            margin: 0 auto;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 720px) {
+            #app-container {
+                width: 100vw;
+                height: calc(100vw * 16 / 9);
+                max-height: 100vh;
+            }
+        }
+        
+        @media (max-height: 1280px) {
+            #app-container {
+                height: 100vh;
+                width: calc(100vh * 9 / 16);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <audio id="menu-music" loop>
+            <source src="audio/menu.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="game-music">
+            <source src="audio/prologue.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="main-menu" class="screen active">
+            <div class="menu-overlay"></div>
+            <div class="menu-content">
+                <h1 class="game-title">НАБЛЮДАТЕЛЬ</h1>
+                <div class="menu-buttons">
+                    <button id="start-btn" class="menu-btn">
+                        <i class="fas fa-play"></i> НАЧАТЬ ИГРУ
+                    </button>
+                    <button id="achievements-btn" class="menu-btn">
+                        <i class="fas fa-trophy"></i> ДОСТИЖЕНИЯ
+                    </button>
+                    <button id="sound-btn" class="menu-btn sound-btn">
+                        <i class="fas fa-volume-up"></i> ЗВУК: ВКЛ
+                    </button>
+                </div>
+                <div class="menu-footer">
+                    <p>Текстовая психологическая драма в антиутопическом антураже</p>
+                    <p class="hint">Нажмите "Начать игру" чтобы погрузиться в историю</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="achievements-screen" class="screen">
+            <div class="screen-header">
+                <button id="back-btn" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> НАЗАД
+                </button>
+                <h2>ДОСТИЖЕНИЯ</h2>
+            </div>
+            <div class="achievements-list">
+                <div class="achievement locked">
+                    <div class="achievement-icon"><i class="fas fa-user"></i></div>
+                    <div class="achievement-info">
+                        <h3>Такой же... как все</h3>
+                        <p>Выбрать безопасный путь в прологе</p>
+                    </div>
+                    <div class="achievement-status">Заблокировано</div>
+                </div>
+                <div class="achievement locked">
+                    <div class="achievement-icon"><i class="fas fa-eye"></i></div>
+                    <div class="achievement-info">
+                        <h3>Наблюдатель</h3>
+                        <p>Пройти пролог, выбрав путь исследования</p>
+                    </div>
+                    <div class="achievement-status">Заблокировано</div>
+                </div>
+            </div>
+            <div class="achievements-footer">
+                <p>Всего достижений: 0 из 2 разблокировано</p>
+            </div>
+        </div>
+        
+        <div id="game-screen" class="screen">
+            <div id="background"></div>
+            <div id="background-overlay"></div>
+            
+            <div id="game-content">
+                <div id="text-container">
+                    <div id="main-text"></div>
+                    <div id="choices-container"></div>
+                </div>
+            </div>
+            
+            <div id="game-hint">
+                <span class="hint-text">[ щелкните или нажмите ПРОБЕЛ ]</span>
+                <div id="sound-toggle" class="sound-icon">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
