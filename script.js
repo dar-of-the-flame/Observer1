@@ -431,14 +431,28 @@ function init() {
     loadAchievements();
     setupEventListeners();
     
-    if (gameState.soundEnabled) {
-        elements.menuMusic.play().catch(e => console.log("Автовоспроизведение заблокировано"));
-    }
+    // Убрали автовоспроизведение из init()
+    // Музыка будет запускаться при первом взаимодействии пользователя
+    
+    // Добавляем обработчик первого взаимодействия
+    const enableAudioOnInteraction = () => {
+        if (gameState.soundEnabled) {
+            elements.menuMusic.play().catch(e => {
+                console.log("Автовоспроизведение разблокировано");
+            });
+        }
+        // Удаляем обработчики после первого взаимодействия
+        document.removeEventListener('click', enableAudioOnInteraction);
+        document.removeEventListener('keydown', enableAudioOnInteraction);
+    };
+    
+    // Ждем первого клика или нажатия клавиши для разблокировки аудио
+    document.addEventListener('click', enableAudioOnInteraction);
+    document.addEventListener('keydown', enableAudioOnInteraction);
     
     switchScreen(CONFIG.states.MENU);
     window.addEventListener('beforeunload', saveAchievements);
 }
-
 // ===== УПРАВЛЕНИЕ ЭКРАНАМИ =====
 function switchScreen(screen) {
     elements.mainMenu.classList.remove('active');
@@ -1132,4 +1146,5 @@ function showEndScreen(title, message) {
 }
 
 // ===== ЗАПУСК ИГРЫ =====
+
 window.addEventListener('DOMContentLoaded', init);
